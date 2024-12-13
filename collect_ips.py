@@ -6,7 +6,7 @@ import os
 # 目标URL列表
 urls = ['https://ip.164746.xyz/ipTop10.html', 
         'https://api.uouin.com/cloudflare.html'
-        'http://ip.flares.cloud/'
+        'http://ip.flares.cloud'
         ]
 
 # 正则表达式用于匹配IP地址
@@ -30,7 +30,7 @@ with open('ip.txt', 'w') as file:
             elements = soup.find_all('tr')
         elif url == 'https://api.uouin.com/cloudflare.html':
             elements = soup.find_all('tr')
-        else url == 'http://ip.flares.cloud/':
+        else url == 'http://ip.flares.cloud':
             elements = soup.find_all('li')
         
         # 遍历所有元素,查找IP地址
