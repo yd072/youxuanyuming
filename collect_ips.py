@@ -29,10 +29,8 @@ with open('ip.txt', 'w') as file:
         if url == 'https://ip.164746.xyz/ipTop10.html':
             elements = soup.find_all('tr')
         elif url == 'https://api.uouin.com/cloudflare.html':
-            elements = soup.find_all('tr') 
-        elif url == 'http://ip.flares.cloud/':
             elements = soup.find_all('tr')
-        else:
+        else url == 'http://ip.flares.cloud/':
             elements = soup.find_all('li')
         
         # 遍历所有元素,查找IP地址
