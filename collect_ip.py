@@ -1,7 +1,7 @@
-
 import socket
 import os
 import requests
+from time import sleep
 
 # 目标域名列表
 domains = [
@@ -35,17 +35,20 @@ with open('proxyip.txt', 'w') as file:
                 data = response.json()
                 country_code = data.get('country', 'Unknown')  # 获取国家代码
                 
-                # 写入 IP 地址和国家代码，格式：IP 地址 #国家简称
-                file.write(f'{ip_address} #{country_code}\n')  # 格式: IP 地址 #国家简称
-                print(f'{ip_address} #{country_code}')  # 控制台输出：IP 地址 #国家简称
+                # 写入 IP 地址和国家代码，格式：IP地址#国家简称
+                file.write(f'{ip_address}#{country_code}\n')  # 格式: IP地址#国家简称
+                print(f'{ip_address}#{country_code}')  # 控制台输出：IP地址#国家简称
             except requests.exceptions.RequestException as e:
                 # 请求失败的错误处理
                 print(f"Error retrieving country for {domain} (IP: {ip_address}): {e}")
-                file.write(f"{ip_address} #Error retrieving country\n")
+                file.write(f"{ip_address}#Error retrieving country\n")
             
         except socket.gaierror as e:
             # 如果解析失败，打印错误并跳过
             print(f"Unable to resolve domain {domain}: {e}")
             continue
+
+        # 为了避免请求频率过快，可以考虑添加一些延迟
+        sleep(1)
 
 print('域名解析的 IP 地址和国家代码已保存到 proxyip.txt 文件中。')
