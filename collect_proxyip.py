@@ -13,10 +13,7 @@ domains = [
     'proxyip.aliyun.fxxk.dedyn.io',
     'proxyip.oracle.fxxk.dedyn.io',
     'proxyip.digitalocean.fxxk.dedyn.io',
-    'collect.gitgoogle.com',
-    'oracle.gitgoogle.com',
-    'aliyun.gitgoogle.com',
-    'us.gitgoogle.com',
+    
     # 你可以添加更多域名
 ]
 
