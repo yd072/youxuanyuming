@@ -32,10 +32,10 @@ def get_ip_country(ip):
             return data.get('country_code', 'unknown').lower()
         else:
             print(f"IP {ip} 查询失败：{data.get('message', '未知错误')}")
-            return 'unknown'
+            return 'unknown不要测真连接'
     except Exception as e:
         print(f"获取 {ip} 国家信息失败: {e}")
-        return 'unknown'
+        return 'unknown不要测真连接'
 
 # 提取IP地址
 def extract_ips_from_url(url):
