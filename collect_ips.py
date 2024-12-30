@@ -32,10 +32,10 @@ def get_ip_country(ip):
             return data.get('country_code', 'unknown').lower()
         else:
             print(f"IP {ip} 查询失败：{data.get('message', '未知错误')}")
-            return 'unknown不要测真连接'
+            return 'unknown'
     except Exception as e:
         print(f"获取 {ip} 国家信息失败: {e}")
-        return 'unknown不要测真连接'
+        return 'unknown'
 
 # 提取IP地址
 def extract_ips_from_url(url):
@@ -76,7 +76,7 @@ def main():
         with open('ip.txt', 'w') as file:
             for ip in ip_addresses:
                 country = get_ip_country(ip)
-                file.write(f"{ip}#{country}\n")
+                file.write(f"{ip}#{country}#不要测真连接\n")
         print("IP地址已保存到 ip.txt 文件中。")
     else:
         print("没有提取到任何IP地址。")
