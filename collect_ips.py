@@ -76,7 +76,7 @@ def main():
         with open('ip.txt', 'w') as file:
             for ip in ip_addresses:
                 country = get_ip_country(ip)
-                file.write(f"{ip}#{country}#不要测真连接\n")
+                file.write(f"{ip}#{country}不要测真连接\n")
         print("IP地址已保存到 ip.txt 文件中。")
     else:
         print("没有提取到任何IP地址。")
