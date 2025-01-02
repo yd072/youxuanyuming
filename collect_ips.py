@@ -29,14 +29,13 @@ def get_ip_country(ip):
 
         # 检查返回数据并获取国家代码
         if data.get('success', False):
-            # 将国家代码转换为大写字母
-            return data.get('country_code', 'unknown').upper()
+            return data.get('country_code', 'UNKNOWN').upper()  # 转换为大写
         else:
             print(f"IP {ip} 查询失败：{data.get('message', '未知错误')}")
-            return 'UNKNOWN'
+            return 'UNKNOWN'  # 默认返回 'UNKNOWN'
     except Exception as e:
         print(f"获取 {ip} 国家信息失败: {e}")
-        return 'UNKNOWN'
+        return 'UNKNOWN'  # 默认返回 'UNKNOWN'
 
 # 提取IP地址
 def extract_ips_from_url(url):
