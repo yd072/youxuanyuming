@@ -2,6 +2,10 @@ import socket
 import os
 import requests
 from time import sleep
+import logging
+
+# 设置日志记录
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # 目标域名列表
 domains = [
@@ -13,7 +17,6 @@ domains = [
     'proxyip.aliyun.fxxk.dedyn.io',
     'proxyip.oracle.fxxk.dedyn.io',
     'proxyip.digitalocean.fxxk.dedyn.io',
-    
     # 你可以添加更多域名
 ]
 
@@ -30,26 +33,24 @@ with open('proxyip.txt', 'w') as file:
             
             # 使用 ipinfo.io 获取 IP 地址的国家信息
             try:
-                response = requests.get(f'https://ipinfo.io/{ip_address}/json')
-                response.raise_for_status()  # 如果响应状态码不是 200，将抛出异常
+                response = requests.get(f'https://ipinfo.io/{ip_address}/json', timeout=10)
+                response.raise_for_status()
 
                 data = response.json()
-                country_code = data.get('country', 'Unknown')  # 获取国家代码
+                country_code = data.get('country', 'Unknown')
                 
-                # 写入 IP 地址和国家代码，格式：IP地址#国家简称
-                file.write(f'{ip_address}#{country_code}\n')  # 格式: IP地址#国家简称
-                print(f'{ip_address}#{country_code}')  # 控制台输出：IP地址#国家简称
+                # 写入 IP 地址和国家代码
+                file.write(f'{ip_address}#{country_code}\n')
+                logging.info(f'{ip_address}#{country_code}')
             except requests.exceptions.RequestException as e:
-                # 请求失败的错误处理
-                print(f"Error retrieving country for {domain} (IP: {ip_address}): {e}")
+                logging.error(f"Error retrieving country for {domain} (IP: {ip_address}): {e}")
                 file.write(f"{ip_address}#Error retrieving country\n")
             
         except socket.gaierror as e:
-            # 如果解析失败，打印错误并跳过
-            print(f"Unable to resolve domain {domain}: {e}")
+            logging.error(f"Unable to resolve domain {domain}: {e}")
             continue
 
         # 为了避免请求频率过快，可以考虑添加一些延迟
         sleep(1)
 
-print('域名解析的 IP 地址和国家代码已保存到 proxyip.txt 文件中。')
+logging.info('域名解析的 IP 地址和国家代码已保存到 proxyip.txt 文件中。')
