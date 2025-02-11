@@ -17,6 +17,7 @@ domains = [
     'proxyip.aliyun.fxxk.dedyn.io',
     'proxyip.oracle.fxxk.dedyn.io',
     'proxyip.digitalocean.fxxk.dedyn.io',
+    'proxyip.oracle.cmliussss.net'
     # 你可以添加更多域名
 ]
 
