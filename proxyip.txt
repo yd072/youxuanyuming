@@ -1,7 +1,7 @@
-198.12.95.225#Error retrieving country
-74.48.85.50#Error retrieving country
-66.42.32.115#Error retrieving country
-47.251.95.178#Error retrieving country
-129.153.203.62#Error retrieving country
-146.190.236.144#Error retrieving country
-129.80.237.223#Error retrieving country
+198.12.95.225#US
+155.138.209.175#US
+66.42.32.115#JP
+47.251.95.178#US
+192.9.236.144#US
+142.93.229.101#NL
+192.9.236.144#US
