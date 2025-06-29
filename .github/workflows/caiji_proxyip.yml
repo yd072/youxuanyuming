@@ -24,7 +24,7 @@ jobs:
         pip install requests beautifulsoup4
 
     - name: Run script
-      run: python ${{ github.workspace }}/collect_ips.py
+      run: python ${{ github.workspace }}/collect_proxyip.py
 
     - name: Commit and push changes
       env:
