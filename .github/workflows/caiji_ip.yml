@@ -3,14 +3,15 @@ name: Update IP List
 on:
   schedule:
     - cron: '0 */12 * * *' # 每12小时运行一次
-  workflow_dispatch:  # 手动触发
+  workflow_dispatch:  # 也支持手动触发
 
 jobs:
   update-ip-list:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -20,8 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests
-        pip install beautifulsoup4
+        pip install requests beautifulsoup4
 
     - name: Run script
       run: python ${{ github.workspace }}/collect_ips.py
@@ -30,11 +30,16 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        set -e
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
-        if [ -n "$(git status --porcelain)" ]; then
+
+        echo "Checking for changes..."
+        if [[ -n "$(git status --porcelain)" ]]; then
+          echo "Changes detected, committing..."
           git add ip.txt
           git commit -m "Automatic update"
           git push origin HEAD:${{ github.ref }}
         else
           echo "No changes detected, skipping commit."
+        fi
