@@ -17,8 +17,6 @@ https://github.com/jc-lw/youxuanyuming
 - 还有js自动生成的https://cf.090227.xyz 
 ![image.png](https://img.kjzl.me/images/51e6dd9bbb99f98d3241509b804d98a4fc1fa5db.png)
 
-- `caijiip.yml `文件夹里面改成你自己的，否则报错
-![image.png](https://img.kjzl.me/images/0ddaaecae1242f12aadaa847662d56a23398cda5.png)
 - `collect_ips.py`文件 这里是抓取优选IP的网站，如需要可自行修改
 ![image.png](https://img.kjzl.me/images/38a3d57288da468b17964664e54da54a4175ba0e.png)
 
