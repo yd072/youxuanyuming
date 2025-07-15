@@ -9,12 +9,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # 目标URL列表
 urls = [
      'https://ip.164746.xyz',    
-    'https://ip.164746.xyz/ipTop.html',
-    'https://ip.164746.xyz/ipTop10.html',
-    'https://raw.githubusercontent.com/tianshipapa/cfipcaiji/refs/heads/main/ip.txt',
+    # 'https://ip.164746.xyz/ipTop.html',
+    # 'https://ip.164746.xyz/ipTop10.html',
+    # 'https://raw.githubusercontent.com/tianshipapa/cfipcaiji/refs/heads/main/ip.txt',
     'https://addressesapi.090227.xyz/CloudFlareYes',
     'https://addressesapi.090227.xyz/ip.164746.xyz',
-    'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
+    # 'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
     'https://ipdb.030101.xyz/bestcfv4'
 ]    # 'https://cf.090227.xyz',
      # 'https://api.uouin.com/cloudflare.html',
