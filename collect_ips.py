@@ -2,13 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import logging
+from collections import defaultdict
 
 # 设置日志记录
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # 目标URL列表
 urls = [
-     'https://ip.164746.xyz',    
+     'https://ip.164746.xyz',
     # 'https://ip.164746.xyz/ipTop.html',
     # 'https://ip.164746.xyz/ipTop10.html',
     # 'https://raw.githubusercontent.com/tianshipapa/cfipcaiji/refs/heads/main/ip.txt',
@@ -22,16 +23,19 @@ urls = [
 # 预编译正则表达式匹配IP地址
 ip_pattern = re.compile(r'\b(?:\d{1,3}\.){3}\d{1,3}\b')
 
-# 获取IP的国家简称 (已修改为使用 ipinfo.io)
+# 获取IP的国家简称
 def get_ip_country(ip):
     try:
-        response = requests.get(f"https://ipinfo.io/{ip}/json", timeout=10)
+        response = requests.get(f"https://ipwhois.app/json/{ip}")
         response.raise_for_status()
         data = response.json()
-        
-        # 从返回数据中获取国家代码，如果没有则返回 'UNKNOWN'
-        return data.get('country', 'UNKNOWN').upper()
 
+        # 检查返回数据并获取国家代码
+        if data.get('success', False):
+            return data.get('country_code', 'UNKNOWN').upper()
+        else:
+            logging.warning(f"IP {ip} 查询失败：{data.get('message', '未知错误')}")
+            return 'UNKNOWN'
     except requests.exceptions.RequestException as e:
         logging.error(f"获取 {ip} 国家信息失败: {e}")
         return 'UNKNOWN'
@@ -48,9 +52,9 @@ def extract_ips_from_url(url):
 
         # 直接从网页中匹配IP地址
         ip_matches = set()
-        elements = soup.find_all(text=ip_pattern)
+        elements = soup.find_all(text=True) # 查找所有文本节点
         for element in elements:
-            ip_matches.update(ip_pattern.findall(element))
+            ip_matches.update(ip_pattern.findall(str(element)))
 
         if ip_matches:
             logging.info(f"从 {url} 提取到 {len(ip_matches)} 个唯一IP")
@@ -69,10 +73,14 @@ def main():
         ip_addresses.update(extract_ips_from_url(url))
 
     if ip_addresses:
+        # 用于跟踪每个国家代码的编号
+        country_counter = defaultdict(int)
         with open('ip.txt', 'w') as file:
-            for ip in ip_addresses:
+            sorted_ips = sorted(list(ip_addresses)) # 对IP进行排序以确保每次运行顺序一致
+            for ip in sorted_ips:
                 country = get_ip_country(ip)
-                file.write(f"{ip}#{country}\n")
+                country_counter[country] += 1
+                file.write(f"{ip}#{country}{country_counter[country]}\n")
         logging.info("IP地址已保存到 ip.txt 文件中。")
     else:
         logging.info("没有提取到任何IP地址。")
