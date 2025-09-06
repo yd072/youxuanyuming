@@ -1,8 +1,8 @@
-89.150.35.129#Error retrieving country
-138.199.42.88#Error retrieving country
-5.180.76.44#Error retrieving country
-47.76.218.163#Error retrieving country
-8.208.24.19#Error retrieving country
-217.142.236.93#Error retrieving country
-138.68.50.216#Error retrieving country
-217.142.226.168#Error retrieving country
+5.180.182.128#NL
+205.251.131.36#US
+202.182.122.164#JP
+62.72.163.109#HK
+47.79.42.197#JP
+131.186.22.50#KR
+138.197.137.206#CA
+132.226.224.4#KR
