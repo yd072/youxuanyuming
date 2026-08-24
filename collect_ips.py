@@ -17,7 +17,7 @@ urls = [
     'https://addressesapi.090227.xyz/ip.164746.xyz',
     # 'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
     'https://ipdb.030101.xyz/bestcfv4'
-]    # 'https://cf.090227.xyz',
+]   'https://raw.githubusercontent.com/LancelotRar/best-cf-ips/main/best-cf-ipv4.txt',
      # 'https://api.uouin.com/cloudflare.html',
 
 # 预编译正则表达式匹配IP地址
